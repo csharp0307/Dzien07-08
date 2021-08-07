@@ -20,7 +20,7 @@ namespace RentACar
 
         BindingSource bSource = new BindingSource();
 
-        private void RefreshData()
+        private DataTable GetDataFromDb()
         {
             // TODO: try catch
             String sql = @"
@@ -38,14 +38,27 @@ namespace RentACar
             adapter.SelectCommand = new MySqlCommand(sql, GlobalData.connection);
             DataTable dt = new DataTable();
             adapter.Fill(dt); //dump danych odczytanych z bazy do obiektu DataTable
+            return dt;
+        }
 
-            bSource.DataSource = dt;
-            grid.DataSource = bSource;
+        private void RefreshData()
+        {            
+            //bSource.DataSource = dt;
+            //grid.DataSource = bSource;
         }
 
         private void FormCarList_Load(object sender, EventArgs e)
         {
-            RefreshData();
+            DataTable dt = GetDataFromDb();
+            bSource.DataSource = dt;
+
+            DataGridViewCheckBoxColumn dgvCmb = new DataGridViewCheckBoxColumn(); //kolumna z checkbox'em
+            dgvCmb.ValueType = typeof(bool);
+            dgvCmb.Name = "avail-cb";
+            dgvCmb.HeaderText = "Dostępny";
+            grid.Columns.Add(dgvCmb);
+
+            grid.DataSource = bSource;
 
             // dostosowanie nagłówków grida
             grid.Columns["id"].HeaderText = "ID";
@@ -53,7 +66,7 @@ namespace RentACar
             grid.Columns["model"].HeaderText = "Model";
             grid.Columns["car_type"].HeaderText = "Własność";
             grid.Columns["registration_plate"].HeaderText = "Nr rejestracyjny";
-            
+
             grid.Columns["engine"].HeaderText = "Pojemność [cm3]";
             grid.Columns["engine"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
@@ -62,6 +75,10 @@ namespace RentACar
 
             grid.Columns["avail"].HeaderText = "Dostępność";
             grid.Columns["fuel"].HeaderText = "Paliwo";
+
+            grid.Columns["avail-cb"].DisplayIndex = grid.Columns.Count - 1;
+
+            
         }
 
         private void grid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -71,11 +88,21 @@ namespace RentACar
                 // formatowanie Avail
                 e.Value = Convert.ToInt32(e.Value) == 1 ? "TAK" : "NIE";
             }
+
+            // wypełnianie checkbox'a w zaleznosci o wartosci kolumny 'avail'
+            grid.Rows[e.RowIndex].Cells["avail-cb"].Value = 
+            Convert.ToInt32(grid.Rows[e.RowIndex].Cells["avail"].Value) == 1 ? true : false;
         }
 
         private void tsbRefresh_Click(object sender, EventArgs e)
         {
             RefreshData();
+        }
+
+        private void tsbInsert_Click(object sender, EventArgs e)
+        {
+            FormAddCar form = new FormAddCar();
+            form.ShowDialog();
         }
     }
 }

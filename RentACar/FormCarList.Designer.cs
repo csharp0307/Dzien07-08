@@ -80,6 +80,7 @@ namespace RentACar
             this.tsbInsert.Name = "tsbInsert";
             this.tsbInsert.Size = new System.Drawing.Size(23, 22);
             this.tsbInsert.Text = "Dodaj nowy samochód";
+            this.tsbInsert.Click += new System.EventHandler(this.tsbInsert_Click);
             // 
             // tsbRefresh
             // 
