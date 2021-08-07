@@ -31,5 +31,11 @@ namespace RentACar
         {
             tsInfo.Text = "Oczekuję na połączenie";
         }
+
+        private void mnuCarList_Click(object sender, EventArgs e)
+        {
+            FormCarList form = new FormCarList();
+            form.ShowDialog();
+        }
     }
 }

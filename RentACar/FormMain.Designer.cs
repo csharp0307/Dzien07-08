@@ -96,8 +96,10 @@ namespace RentACar
             // mnuCarList
             // 
             this.mnuCarList.Name = "mnuCarList";
-            this.mnuCarList.Size = new System.Drawing.Size(173, 22);
+            this.mnuCarList.ShortcutKeys = System.Windows.Forms.Keys.F3;
+            this.mnuCarList.Size = new System.Drawing.Size(192, 22);
             this.mnuCarList.Text = "Lista samochodów";
+            this.mnuCarList.Click += new System.EventHandler(this.mnuCarList_Click);
             // 
             // statusStrip1
             // 
