@@ -39,12 +39,22 @@ namespace RentACar
                     return;
                 }
 
+                // zmiana kursora na "kręciołkę"
+                Cursor.Current = Cursors.WaitCursor;
+
                 cs = String.Format(cs, tbLogin.Text.Trim(), tbPassword.Text.Trim());
-                new MySqlConnection(cs);
+                GlobalData.connection = new MySqlConnection(cs);
+                GlobalData.connection.Open();
+
+                DialogResult = DialogResult.OK;
+                Close();
             }
             catch (Exception exc)
             {
-
+                DialogHelper.E(exc.Message);
+            } finally
+            {
+                Cursor.Current = Cursors.Default; //odtwarzam domyślny kursor
             }
         }
     }

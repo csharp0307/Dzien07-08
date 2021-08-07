@@ -52,6 +52,7 @@ namespace RentACar
             this.tbLogin.Name = "tbLogin";
             this.tbLogin.Size = new System.Drawing.Size(261, 20);
             this.tbLogin.TabIndex = 1;
+            this.tbLogin.Text = "root";
             // 
             // tbPassword
             // 
@@ -60,6 +61,7 @@ namespace RentACar
             this.tbPassword.PasswordChar = '*';
             this.tbPassword.Size = new System.Drawing.Size(261, 20);
             this.tbPassword.TabIndex = 3;
+            this.tbPassword.Text = "root";
             // 
             // label2
             // 

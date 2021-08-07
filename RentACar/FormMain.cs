@@ -20,7 +20,16 @@ namespace RentACar
         private void mnuLogin_Click(object sender, EventArgs e)
         {
             FormLogin form = new FormLogin();
-            form.ShowDialog();
+            if ( form.ShowDialog()==DialogResult.OK)
+            {
+                tsInfo.Text = "Połączono z bazą danych";
+                mnuCarRent.Enabled = true;
+            }
+        }
+
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+            tsInfo.Text = "Oczekuję na połączenie";
         }
     }
 }
