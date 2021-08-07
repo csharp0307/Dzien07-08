@@ -73,14 +73,26 @@ namespace RentACar
             // 
             // numYear
             // 
+            this.numYear.Increment = new decimal(new int[] {
+            5000,
+            0,
+            0,
+            0});
             this.numYear.Location = new System.Drawing.Point(51, 223);
+            this.numYear.Maximum = new decimal(new int[] {
+            200000,
+            0,
+            0,
+            0});
             this.numYear.Name = "numYear";
             this.numYear.Size = new System.Drawing.Size(182, 20);
             this.numYear.TabIndex = 3;
             // 
             // tbRegPlate
             // 
+            this.tbRegPlate.Culture = new System.Globalization.CultureInfo("en-GB");
             this.tbRegPlate.Location = new System.Drawing.Point(51, 286);
+            this.tbRegPlate.Mask = "AAAaaaaa";
             this.tbRegPlate.Name = "tbRegPlate";
             this.tbRegPlate.Size = new System.Drawing.Size(182, 20);
             this.tbRegPlate.TabIndex = 4;
@@ -122,6 +134,7 @@ namespace RentACar
             this.picCar.Location = new System.Drawing.Point(262, 43);
             this.picCar.Name = "picCar";
             this.picCar.Size = new System.Drawing.Size(320, 320);
+            this.picCar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picCar.TabIndex = 8;
             this.picCar.TabStop = false;
             // 
@@ -133,6 +146,7 @@ namespace RentACar
             this.btnLoadPic.TabIndex = 9;
             this.btnLoadPic.Text = "Wczytaj obraz";
             this.btnLoadPic.UseVisualStyleBackColor = true;
+            this.btnLoadPic.Click += new System.EventHandler(this.btnLoadPic_Click);
             // 
             // btnDelPic
             // 
@@ -142,6 +156,7 @@ namespace RentACar
             this.btnDelPic.TabIndex = 10;
             this.btnDelPic.Text = "Usuń obraz";
             this.btnDelPic.UseVisualStyleBackColor = true;
+            this.btnDelPic.Click += new System.EventHandler(this.btnDelPic_Click);
             // 
             // FormAddCar
             // 

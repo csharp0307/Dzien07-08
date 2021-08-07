@@ -35,6 +35,7 @@ namespace RentACar
             cbBrands.DisplayMember = "name";
             cbBrands.ValueMember = "id";
             cbBrands.SelectedIndex = -1;
+            cbBrands.SelectedIndexChanged += CbBrands_SelectedIndexChanged;
 
             // models
             adapter = new MySqlDataAdapter();
@@ -47,6 +48,7 @@ namespace RentACar
             cbModels.DisplayMember = "name";
             cbModels.ValueMember = "id";
             cbModels.SelectedIndex = -1;
+            cbModels.Enabled = false;
 
             // types
             adapter = new MySqlDataAdapter();
@@ -62,9 +64,43 @@ namespace RentACar
 
         }
 
+        private void CbBrands_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbBrands.SelectedIndex>-1)
+            {
+                bsModels.Filter = $"brand_id={cbBrands.SelectedValue}";
+                cbModels.DataSource = bsModels;
+                if (bsModels.Count>0)
+                {
+                    cbModels.Enabled = true;
+                    cbModels.SelectedIndex = -1;
+                }
+            }
+        }
+
         private void FormAddCar_Load(object sender, EventArgs e)
         {
             LoadDictionaries();
+        }
+
+        private void btnLoadPic_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Image files|*.jpg;*.bmp;*.png;*.jpeg";
+            if (dialog.ShowDialog()==DialogResult.OK)
+            {
+                //wyswietlic obraz w komponencie
+                picCar.Image = new Bitmap(dialog.FileName);
+            }
+        }
+
+        private void btnDelPic_Click(object sender, EventArgs e)
+        {
+            if (picCar.Image!=null)
+            {
+                picCar.Image.Dispose();
+                picCar.Image = null;
+            }
         }
     }
 }
