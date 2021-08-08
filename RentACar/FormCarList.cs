@@ -148,6 +148,29 @@ namespace RentACar
                 DialogHelper.E(exc.Message);
             }
         }
+
+        private void mnuEdit_Click(object sender, EventArgs e)
+        {
+            if (grid.SelectedRows.Count != 1)
+                return;
+            int selectedIndex = grid.SelectedRows[0].Index;
+            int _id = Convert.ToInt32(grid["id", selectedIndex].Value);
+
+            FormAddCar form = new FormAddCar();
+            form.RowId = _id;
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                RefreshData();
+            }
+        }
+
+        private void tbFind_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)
+            {
+                bSource.Filter = $" brand LIKE '%{tbFind.Text.Trim()}%' ";
+            }
+        }
     }
 }
 

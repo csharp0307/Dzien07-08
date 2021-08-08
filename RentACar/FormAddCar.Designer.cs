@@ -103,7 +103,7 @@ namespace RentACar
             this.tbRegPlate.Mask = "AAAaaaaa";
             this.tbRegPlate.Name = "tbRegPlate";
             this.tbRegPlate.Size = new System.Drawing.Size(182, 20);
-            this.tbRegPlate.TabIndex = 4;
+            this.tbRegPlate.TabIndex = 5;
             // 
             // cbFuel
             // 
@@ -116,14 +116,14 @@ namespace RentACar
             this.cbFuel.Location = new System.Drawing.Point(51, 342);
             this.cbFuel.Name = "cbFuel";
             this.cbFuel.Size = new System.Drawing.Size(182, 21);
-            this.cbFuel.TabIndex = 5;
+            this.cbFuel.TabIndex = 6;
             // 
             // btnOK
             // 
             this.btnOK.Location = new System.Drawing.Point(94, 401);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(124, 54);
-            this.btnOK.TabIndex = 6;
+            this.btnOK.TabIndex = 9;
             this.btnOK.Text = "Zapisz";
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
@@ -134,7 +134,7 @@ namespace RentACar
             this.btnCancel.Location = new System.Drawing.Point(501, 401);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(124, 54);
-            this.btnCancel.TabIndex = 7;
+            this.btnCancel.TabIndex = 10;
             this.btnCancel.Text = "Anuluj";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
@@ -153,7 +153,7 @@ namespace RentACar
             this.btnLoadPic.Location = new System.Drawing.Point(604, 41);
             this.btnLoadPic.Name = "btnLoadPic";
             this.btnLoadPic.Size = new System.Drawing.Size(131, 23);
-            this.btnLoadPic.TabIndex = 9;
+            this.btnLoadPic.TabIndex = 7;
             this.btnLoadPic.Text = "Wczytaj obraz";
             this.btnLoadPic.UseVisualStyleBackColor = true;
             this.btnLoadPic.Click += new System.EventHandler(this.btnLoadPic_Click);
@@ -163,7 +163,7 @@ namespace RentACar
             this.btnDelPic.Location = new System.Drawing.Point(604, 116);
             this.btnDelPic.Name = "btnDelPic";
             this.btnDelPic.Size = new System.Drawing.Size(131, 23);
-            this.btnDelPic.TabIndex = 10;
+            this.btnDelPic.TabIndex = 8;
             this.btnDelPic.Text = "Usuń obraz";
             this.btnDelPic.UseVisualStyleBackColor = true;
             this.btnDelPic.Click += new System.EventHandler(this.btnDelPic_Click);
@@ -188,7 +188,7 @@ namespace RentACar
             0});
             this.numEngine.Name = "numEngine";
             this.numEngine.Size = new System.Drawing.Size(182, 20);
-            this.numEngine.TabIndex = 11;
+            this.numEngine.TabIndex = 4;
             this.numEngine.Value = new decimal(new int[] {
             1598,
             0,
@@ -217,7 +217,8 @@ namespace RentACar
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormAddCar";
-            this.Text = "Dodaj nowy samochów";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Dodaj nowy samochód";
             this.Load += new System.EventHandler(this.FormAddCar_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numYear)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picCar)).EndInit();

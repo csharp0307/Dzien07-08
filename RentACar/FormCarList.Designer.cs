@@ -42,6 +42,7 @@ namespace RentACar
             this.mnuDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuRefresh = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -72,6 +73,7 @@ namespace RentACar
             this.tbFind.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.tbFind.Name = "tbFind";
             this.tbFind.Size = new System.Drawing.Size(100, 25);
+            this.tbFind.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbFind_KeyPress);
             // 
             // toolStripSeparator1
             // 
@@ -119,11 +121,12 @@ namespace RentACar
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuEdit,
             this.mnuDelete,
             this.toolStripMenuItem1,
             this.mnuRefresh});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 76);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(138, 76);
             // 
             // mnuDelete
             // 
@@ -145,6 +148,14 @@ namespace RentACar
             this.mnuRefresh.Size = new System.Drawing.Size(180, 22);
             this.mnuRefresh.Text = "Odśwież";
             this.mnuRefresh.Click += new System.EventHandler(this.mnuRefresh_Click);
+            // 
+            // mnuEdit
+            // 
+            this.mnuEdit.Name = "mnuEdit";
+            this.mnuEdit.ShortcutKeys = System.Windows.Forms.Keys.F4;
+            this.mnuEdit.Size = new System.Drawing.Size(180, 22);
+            this.mnuEdit.Text = "Edytuj";
+            this.mnuEdit.Click += new System.EventHandler(this.mnuEdit_Click);
             // 
             // FormCarList
             // 
@@ -178,5 +189,6 @@ namespace RentACar
         private System.Windows.Forms.ToolStripMenuItem mnuDelete;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem mnuRefresh;
+        private System.Windows.Forms.ToolStripMenuItem mnuEdit;
     }
 }

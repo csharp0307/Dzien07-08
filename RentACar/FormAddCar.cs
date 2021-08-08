@@ -114,6 +114,10 @@ namespace RentACar
                     }
 
                     data.Close();
+
+                    // aktualizacja tesktów na GUI
+                    btnOK.Text = "Aktualizuj";
+                    Text = "Edytuj samochód";
                     
                 }
             }
@@ -127,7 +131,7 @@ namespace RentACar
                 FROM 
                   cars AS c , car_types AS ct, car_models AS m, car_brands AS b
                 WHERE 
-                	c.id = 1 AND 
+                	c.id = "+ rowId + @" AND 
                   c.type_id = ct.id  AND c.model_id=m.id AND m.brand_id=b.id                
             ";
             MySqlCommand cmd = new MySqlCommand(sql, GlobalData.connection);
@@ -154,7 +158,7 @@ namespace RentACar
             {
                 picCar.Image.Dispose();
                 picCar.Image = null;
-                pictureFileName = null;
+                pictureFileName = "";
             }
         }
 
@@ -181,12 +185,37 @@ namespace RentACar
 
         private void SaveData()
         {
-            String sql = @"
-            INSERT INTO cars 
-            ( model_id, type_id, registration_plate, `engine`, manufacturer_year, image, fuel) 
-            VALUES
-            ( @model_id, @type_id, @reg_plate, @engine, @year, @image, @fuel)
-            ";
+            String sql;
+            if (RowId>0)
+            {
+                //edycja
+                if (pictureFileName == null)
+                {
+                    sql = @"UPDATE cars SET 
+                         model_id=@model_id, type_id=@type_id, 
+                         registration_plate=@reg_plate, `engine`=@engine, 
+                         manufacturer_year=@year, fuel=@fuel
+                        WHERE id=@id";
+                }
+                else
+                {
+                    sql = @"UPDATE cars SET 
+                         model_id=@model_id, type_id=@type_id, 
+                         registration_plate=@reg_plate, `engine`=@engine, 
+                         manufacturer_year=@year, image=@image, fuel=@fuel
+                        WHERE id=@id";
+                }
+            } else
+            {
+                //dodawanie
+                sql = @"
+                    INSERT INTO cars 
+                    ( model_id, type_id, registration_plate, `engine`, manufacturer_year, image, fuel) 
+                    VALUES
+                    ( @model_id, @type_id, @reg_plate, @engine, @year, @image, @fuel)
+                    ";
+            }
+
 
             // deklaracja parametrów do zapytania
             MySqlCommand cmd = new MySqlCommand(sql, GlobalData.connection);
@@ -205,13 +234,16 @@ namespace RentACar
             cmd.Parameters["@year"].Value = numYear.Value;
             cmd.Parameters["@engine"].Value = numEngine.Value;
             cmd.Parameters["@fuel"].Value = cbFuel.SelectedItem; //tylko jesli nie ma DataSource przypisanego
-            if (pictureFileName!=null)
+            if (!String.IsNullOrEmpty(pictureFileName))
             {
                 cmd.Parameters["@image"].Value = File.ReadAllBytes(pictureFileName);
             } else
             {
                 cmd.Parameters["@image"].Value = null;
             }
+
+            cmd.Parameters.AddWithValue("@id", RowId);
+
             cmd.ExecuteNonQuery();
 
             // zamykamy okno
