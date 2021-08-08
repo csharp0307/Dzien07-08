@@ -39,10 +39,11 @@ namespace RentACar
             this.tsbRefresh = new System.Windows.Forms.ToolStripButton();
             this.grid = new System.Windows.Forms.DataGridView();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnuOper = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuRefresh = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -121,12 +122,29 @@ namespace RentACar
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuOper,
             this.mnuEdit,
             this.mnuDelete,
             this.toolStripMenuItem1,
             this.mnuRefresh});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(138, 76);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 120);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
+            // 
+            // mnuOper
+            // 
+            this.mnuOper.Name = "mnuOper";
+            this.mnuOper.Size = new System.Drawing.Size(180, 22);
+            this.mnuOper.Text = "Wydaj/Zdaj";
+            this.mnuOper.Click += new System.EventHandler(this.mnuOper_Click);
+            // 
+            // mnuEdit
+            // 
+            this.mnuEdit.Name = "mnuEdit";
+            this.mnuEdit.ShortcutKeys = System.Windows.Forms.Keys.F4;
+            this.mnuEdit.Size = new System.Drawing.Size(180, 22);
+            this.mnuEdit.Text = "Edytuj";
+            this.mnuEdit.Click += new System.EventHandler(this.mnuEdit_Click);
             // 
             // mnuDelete
             // 
@@ -148,14 +166,6 @@ namespace RentACar
             this.mnuRefresh.Size = new System.Drawing.Size(180, 22);
             this.mnuRefresh.Text = "Odśwież";
             this.mnuRefresh.Click += new System.EventHandler(this.mnuRefresh_Click);
-            // 
-            // mnuEdit
-            // 
-            this.mnuEdit.Name = "mnuEdit";
-            this.mnuEdit.ShortcutKeys = System.Windows.Forms.Keys.F4;
-            this.mnuEdit.Size = new System.Drawing.Size(180, 22);
-            this.mnuEdit.Text = "Edytuj";
-            this.mnuEdit.Click += new System.EventHandler(this.mnuEdit_Click);
             // 
             // FormCarList
             // 
@@ -190,5 +200,6 @@ namespace RentACar
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem mnuRefresh;
         private System.Windows.Forms.ToolStripMenuItem mnuEdit;
+        private System.Windows.Forms.ToolStripMenuItem mnuOper;
     }
 }

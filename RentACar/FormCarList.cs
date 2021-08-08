@@ -171,6 +171,31 @@ namespace RentACar
                 bSource.Filter = $" brand LIKE '%{tbFind.Text.Trim()}%' ";
             }
         }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void mnuOper_Click(object sender, EventArgs e)
+        {
+            if (grid.SelectedRows.Count != 1) return;
+
+            int selectedIndex = grid.SelectedRows[0].Index;
+            int avail = Convert.ToInt32(grid["avail", selectedIndex].Value);
+            bool operBack = avail == 0 ? true : false;
+
+            String reg_plate = grid["registration_plate", selectedIndex].Value.ToString();
+            int carId = Convert.ToInt32(grid["id", selectedIndex].Value);
+
+            FormOperation form = new FormOperation();
+            form.OperBack = operBack;
+            form.RegPlate = reg_plate;
+            form.CarId = carId;
+            form.ShowDialog();
+
+
+        }
     }
 }
 
