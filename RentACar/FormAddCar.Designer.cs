@@ -40,8 +40,10 @@ namespace RentACar
             this.picCar = new System.Windows.Forms.PictureBox();
             this.btnLoadPic = new System.Windows.Forms.Button();
             this.btnDelPic = new System.Windows.Forms.Button();
+            this.numEngine = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.numYear)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picCar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numEngine)).BeginInit();
             this.SuspendLayout();
             // 
             // cbBrands
@@ -57,7 +59,7 @@ namespace RentACar
             // 
             this.cbModels.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbModels.FormattingEnabled = true;
-            this.cbModels.Location = new System.Drawing.Point(51, 99);
+            this.cbModels.Location = new System.Drawing.Point(51, 90);
             this.cbModels.Name = "cbModels";
             this.cbModels.Size = new System.Drawing.Size(182, 21);
             this.cbModels.TabIndex = 1;
@@ -66,30 +68,36 @@ namespace RentACar
             // 
             this.cbTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTypes.FormattingEnabled = true;
-            this.cbTypes.Location = new System.Drawing.Point(51, 161);
+            this.cbTypes.Location = new System.Drawing.Point(51, 135);
             this.cbTypes.Name = "cbTypes";
             this.cbTypes.Size = new System.Drawing.Size(182, 21);
             this.cbTypes.TabIndex = 2;
             // 
             // numYear
             // 
-            this.numYear.Increment = new decimal(new int[] {
-            5000,
+            this.numYear.Location = new System.Drawing.Point(51, 182);
+            this.numYear.Maximum = new decimal(new int[] {
+            2021,
             0,
             0,
             0});
-            this.numYear.Location = new System.Drawing.Point(51, 223);
-            this.numYear.Maximum = new decimal(new int[] {
-            200000,
+            this.numYear.Minimum = new decimal(new int[] {
+            1950,
             0,
             0,
             0});
             this.numYear.Name = "numYear";
             this.numYear.Size = new System.Drawing.Size(182, 20);
             this.numYear.TabIndex = 3;
+            this.numYear.Value = new decimal(new int[] {
+            2021,
+            0,
+            0,
+            0});
             // 
             // tbRegPlate
             // 
+            this.tbRegPlate.AsciiOnly = true;
             this.tbRegPlate.Culture = new System.Globalization.CultureInfo("en-GB");
             this.tbRegPlate.Location = new System.Drawing.Point(51, 286);
             this.tbRegPlate.Mask = "AAAaaaaa";
@@ -118,6 +126,7 @@ namespace RentACar
             this.btnOK.TabIndex = 6;
             this.btnOK.Text = "Zapisz";
             this.btnOK.UseVisualStyleBackColor = true;
+            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // btnCancel
             // 
@@ -158,11 +167,39 @@ namespace RentACar
             this.btnDelPic.UseVisualStyleBackColor = true;
             this.btnDelPic.Click += new System.EventHandler(this.btnDelPic_Click);
             // 
+            // numEngine
+            // 
+            this.numEngine.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numEngine.Location = new System.Drawing.Point(51, 232);
+            this.numEngine.Maximum = new decimal(new int[] {
+            6500,
+            0,
+            0,
+            0});
+            this.numEngine.Minimum = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            this.numEngine.Name = "numEngine";
+            this.numEngine.Size = new System.Drawing.Size(182, 20);
+            this.numEngine.TabIndex = 11;
+            this.numEngine.Value = new decimal(new int[] {
+            1598,
+            0,
+            0,
+            0});
+            // 
             // FormAddCar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(747, 477);
+            this.Controls.Add(this.numEngine);
             this.Controls.Add(this.btnDelPic);
             this.Controls.Add(this.btnLoadPic);
             this.Controls.Add(this.picCar);
@@ -182,6 +219,7 @@ namespace RentACar
             this.Load += new System.EventHandler(this.FormAddCar_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numYear)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picCar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numEngine)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -200,5 +238,6 @@ namespace RentACar
         private System.Windows.Forms.PictureBox picCar;
         private System.Windows.Forms.Button btnLoadPic;
         private System.Windows.Forms.Button btnDelPic;
+        private System.Windows.Forms.NumericUpDown numEngine;
     }
 }
