@@ -15,6 +15,7 @@ namespace RentACar
 {
     public partial class FormAddCar : Form
     {
+        public int RowId { get; set; } //ID wiersza do edycji
         public FormAddCar()
         {
             InitializeComponent();
@@ -85,6 +86,53 @@ namespace RentACar
             LoadDictionaries();
             numYear.Value = DateTime.Now.Year;
             numYear.Maximum = DateTime.Now.Year;
+
+            // jesli RowId>0 to oznacza że jestesmy w edycji rekordu
+            if (RowId>0)
+            {
+                MySqlDataReader data = GetRecord(RowId);
+                if (data!=null && data.HasRows)
+                {
+                    data.Read(); // inicjalne pobranie rekordu z danymi
+                    numEngine.Value = Convert.ToInt32( data["engine"] );
+                    numYear.Value = Convert.ToInt32(data["manufacturer_year"]);
+                    tbRegPlate.Text = data["registration_plate"].ToString();
+
+                    cbBrands.SelectedValue = data["brand_id"];
+                    cbModels.SelectedValue = data["model_id"];
+                    cbTypes.SelectedValue = data["type_id"];
+
+                    cbFuel.SelectedIndex = cbFuel.Items.IndexOf(data["fuel"]);
+
+                    if (!(data["image"] is DBNull ))
+                    {
+                        byte[] b = (byte[])data["image"];
+                        using (MemoryStream ms = new MemoryStream(b))
+                        {
+                            picCar.Image = Image.FromStream(ms);
+                        }
+                    }
+
+                    data.Close();
+                    
+                }
+            }
+        }
+
+        private MySqlDataReader GetRecord(int rowId)
+        {
+            String sql = @"
+                SELECT 
+                   c.* , m.brand_id  
+                FROM 
+                  cars AS c , car_types AS ct, car_models AS m, car_brands AS b
+                WHERE 
+                	c.id = 1 AND 
+                  c.type_id = ct.id  AND c.model_id=m.id AND m.brand_id=b.id                
+            ";
+            MySqlCommand cmd = new MySqlCommand(sql, GlobalData.connection);
+            MySqlDataReader result = cmd.ExecuteReader();            
+            return result;
         }
 
         string pictureFileName = null;

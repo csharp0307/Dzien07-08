@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using RentACar.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -42,9 +43,10 @@ namespace RentACar
         }
 
         private void RefreshData()
-        {            
-            //bSource.DataSource = dt;
-            //grid.DataSource = bSource;
+        {
+            DataTable dt = GetDataFromDb();
+            bSource.DataSource = dt;
+            grid.DataSource = bSource;
         }
 
         private void FormCarList_Load(object sender, EventArgs e)
@@ -102,7 +104,49 @@ namespace RentACar
         private void tsbInsert_Click(object sender, EventArgs e)
         {
             FormAddCar form = new FormAddCar();
-            form.ShowDialog();
+            if (form.ShowDialog()==DialogResult.OK)
+            {
+                RefreshData();
+            }
+        }
+
+        private void mnuRefresh_Click(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
+
+        private void mnuDelete_Click(object sender, EventArgs e)
+        {
+            DeleteRow();
+        }
+
+        private void DeleteRow()
+        {
+            if (grid.SelectedRows.Count != 1)
+                return;
+
+            DialogResult result = MessageBox.Show("Czy usunąć rekord?", "Pytanie", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result != DialogResult.Yes) return;
+
+            try
+            {
+                String sql = "DELETE FROM cars WHERE id=@id";
+                MySqlCommand cmd = new MySqlCommand(sql, GlobalData.connection);
+
+                int selectedIndex = grid.SelectedRows[0].Index;
+                int _id = Convert.ToInt32(grid["id", selectedIndex].Value);
+
+                cmd.Parameters.AddWithValue("@id", _id);
+                cmd.ExecuteNonQuery();
+
+                // usuniecie wiersza z grida
+                grid.Rows.RemoveAt(selectedIndex);
+
+            }
+            catch (Exception exc)
+            {
+                DialogHelper.E(exc.Message);
+            }
         }
     }
 }
