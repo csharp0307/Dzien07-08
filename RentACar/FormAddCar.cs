@@ -178,7 +178,7 @@ namespace RentACar
             if (cbModels.SelectedIndex>-1 
                 && cbTypes.SelectedIndex>-1
                 && cbFuel.SelectedIndex>-1
-                && String.IsNullOrWhiteSpace(tbRegPlate.Text) ) 
+                && !String.IsNullOrWhiteSpace(tbRegPlate.Text) ) 
                 return true;
 
 
